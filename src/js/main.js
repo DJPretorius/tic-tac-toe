@@ -1,12 +1,16 @@
 import { TicTacToeGame } from './game.js';
 
-class GameUI {
-    constructor() {
+export class GameUI {
+    constructor({ gameBoard, gameStatus, resetButton, cells }) {
+        if (!gameBoard || !gameStatus || !resetButton || !cells) {
+            throw new Error('All DOM elements must be provided to GameUI constructor');
+        }
+
         this.game = new TicTacToeGame();
-        this.gameBoard = document.getElementById('gameBoard');
-        this.gameStatus = document.getElementById('gameStatus');
-        this.resetButton = document.getElementById('resetButton');
-        this.cells = document.querySelectorAll('[data-cell]');
+        this.gameBoard = gameBoard;
+        this.gameStatus = gameStatus;
+        this.resetButton = resetButton;
+        this.cells = cells;
         this.winningLine = null;
         
         this.initializeGame();
@@ -100,7 +104,19 @@ class GameUI {
     }
 }
 
-// Initialize the game when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new GameUI();
-}); 
+// Create a separate initialization file
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+        const gameBoard = document.getElementById('gameBoard');
+        const gameStatus = document.getElementById('gameStatus');
+        const resetButton = document.getElementById('resetButton');
+        const cells = document.querySelectorAll('[data-cell]');
+
+        new GameUI({
+            gameBoard,
+            gameStatus,
+            resetButton,
+            cells
+        });
+    });
+} 

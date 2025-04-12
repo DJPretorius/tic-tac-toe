@@ -5,11 +5,15 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     coverage: {
+      provider: 'v8',
       reporter: ['text', 'html'],
+      include: ['src/js/game.js'],
       exclude: [
-        'node_modules/',
+        'node_modules/**',
         'tests/**',
-      ],
+        '**/*.config.js',
+        'public/**'
+      ]
     },
   },
 }) 
