@@ -1,0 +1,176 @@
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --background-color: #ecf0f1;
+  --cell-size: 100px;
+  --mark-size: calc(var(--cell-size) * 0.8);
+  --x-color: #e74c3c;
+  --o-color: #3498db;
+  --line-color: #2c3e50;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+}
+
+.game-status {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  height: 1.5rem;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 10px;
+  margin: 0 auto;
+  max-width: fit-content;
+  background-color: var(--primary-color);
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background-color: var(--background-color);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(var(--mark-size) * 0.7);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.cell:not(:empty) {
+  cursor: not-allowed;
+}
+
+.cell:empty:hover {
+  background-color: #d5dbdb;
+}
+
+/* Style for X and O markers */
+.cell[data-value="X"] {
+  color: var(--x-color);
+}
+
+.cell[data-value="O"] {
+  color: var(--o-color);
+}
+
+.reset-button {
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.reset-button:hover {
+  background-color: #2980b9;
+}
+
+/* Winning line styles */
+.winning-line {
+  position: absolute;
+  background-color: var(--line-color);
+  z-index: 1;
+}
+
+/* Horizontal lines */
+.winning-line.horizontal {
+  height: 4px;
+  width: calc(100% - 20px);
+  left: 10px;
+}
+
+.winning-line.horizontal.row-0 { top: calc(var(--cell-size) / 2 + 10px); }
+.winning-line.horizontal.row-1 { top: calc(var(--cell-size) * 1.5 + 20px); }
+.winning-line.horizontal.row-2 { top: calc(var(--cell-size) * 2.5 + 30px); }
+
+/* Vertical lines */
+.winning-line.vertical {
+  width: 4px;
+  height: calc(100% - 20px);
+  top: 10px;
+}
+
+.winning-line.vertical.col-0 { left: calc(var(--cell-size) / 2 + 10px); }
+.winning-line.vertical.col-1 { left: calc(var(--cell-size) * 1.5 + 20px); }
+.winning-line.vertical.col-2 { left: calc(var(--cell-size) * 2.5 + 30px); }
+
+/* Diagonal lines */
+.winning-line.diagonal {
+  height: 4px;
+  width: calc(141.4% - 20px); /* approximately √2 * 100% to account for diagonal length */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  
+}
+
+.winning-line.diagonal.left {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.winning-line.diagonal.right {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+  :root {
+    --cell-size: 80px;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .game-status {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .reset-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+  }
+} 
