@@ -4,6 +4,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    exclude: ['**/e2e/**', '**/playwright/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
