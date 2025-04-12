@@ -1,4 +1,4 @@
-# Tick-Tack-Bird
+# Tic Tac Toe
 
 A Tic Tac Toe game implementation using vanilla JavaScript, HTML, and CSS.
 
