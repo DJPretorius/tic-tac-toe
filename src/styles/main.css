@@ -173,4 +173,27 @@ h1 {
     padding: 0.6rem 1.5rem;
     font-size: 1rem;
   }
+}
+
+.github-badge {
+  display: inline-flex;
+  align-items: center;
+  background: #24292e;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  margin: 0 auto 20px;
+}
+
+.github-badge:hover {
+  background: #2f363d;
+}
+
+.github-badge img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
 } 
